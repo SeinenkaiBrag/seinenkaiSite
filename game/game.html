@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seinenkai - Bragança Pta.</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="game.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/LogoSeinen.svg">
+</head>
+
+<body>
+
+    <nav class="navScroll">
+        <div class="nav-left">
+            <a href="../index.html" class="nav-logo">
+                <img src="../assets/img/LogoSeinen.svg" alt="">
+                <p>Seinenkai Bragança</p>
+            </a>
+            <a href="#" class="nav-link">Eventos</a>
+            <a href="#" class="nav-link">Parcerias</a>
+        </div>
+
+        <div class="nav-right">
+            <a href="#" class="nav-button nav01">Faça Parte</a>
+            <a class="nav-button nav02 nav-modal-on" onclick="openCloseModal(this)">=</a>
+        </div>        
+    </nav> 
+     
+    <div class="nav-modal nav-modal-off">
+        <a href="#" class="nav-link">Eventos</a>
+        <a href="#" class="nav-link">Parcerias</a>
+        <a href="#" class="nav-button">Faça Parte</a>
+    </div>
+
+    <div class="game">
+        <img src="./assets/scene/Background.png" class="gback">
+        <img src="./assets/scene/help.png" class="ghelp">
+
+
+        <div class="pCardArea">
+            <img class="pCard" onclick="playerChoseCard(this, 0)">
+            <img class="pCard" onclick="playerChoseCard(this, 1)">
+            <img class="pCard" onclick="playerChoseCard(this, 2)">
+            <img class="pCard" onclick="playerChoseCard(this, 3)">
+        </div>
+
+        <img src="" class="cCard">
+
+        <img src="./assets/scene/border.png" class="gborder">
+
+        <div class="gameover" style="display: none;">
+            <img src="./assets/scene/gameover.png" class="goback">
+            <img src="./assets/scene/botao.png" class="gobotao" onclick="reloadGame(this)">
+        </div>
+
+        <div class="loading">
+            <img src="./assets/scene/loading/loadPin.png" class="lPin">
+            <img src="./assets/scene/loading/0.png" class="lBar">
+            <img src="./assets/scene/loading/loading.gif" class="load">
+        </div>
+    </div>
+
+
+    <script src="../scripts/app.js"></script>
+    <script src="game.js"></script>
+    <script>
+        function reloadGame(botao){
+            botao.classList.toggle('gobotaoc')
+            setTimeout(() => { location.reload() }, 1000)
+        }
+
+        const load = document.querySelector(".lBar")
+        const loading = document.querySelector(".loading")
+
+        function loadImages(i) {
+            if (i < 10) {
+              load.src = `./assets/scene/loading/${i}.png`;
+          
+              load.onload = function() {
+                setTimeout( () => {
+                  loadImages(i + 1);
+                }, 
+                300);
+              };
+            } else {
+                loading.style.opacity = 0
+                setTimeout(() => loading.style.display = "none", 800)
+            }
+          }
+          loadImages(0);
+
+    </script>
+</body>
+</html>
