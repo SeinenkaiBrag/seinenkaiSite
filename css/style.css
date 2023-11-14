@@ -2,6 +2,7 @@
 
 
 @import "nav.css";
+@import "loading.css";
 
 *{
     box-sizing: border-box;

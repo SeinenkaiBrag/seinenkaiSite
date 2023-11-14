@@ -20,3 +20,15 @@ function openCloseModal(botao){
     
     navModal.classList.toggle('nav-modal-off');
 }
+
+// loadPage
+
+const loadPage = document.querySelector(".loadingPage");
+
+loadPage.style.display = "";
+loadPage.style.opacity = "100%";
+
+window.onload = () => {
+    loadPage.style.opacity = "0";
+    setTimeout(() => loadPage.style.display = "none", 800);
+}
