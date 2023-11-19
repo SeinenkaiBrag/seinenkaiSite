@@ -28,7 +28,7 @@ let valores = [
   {
     tilt: "IBU",
     img1: "./assets/img/headIBU.jpeg",
-    img2: "./assets/img/sobIbu.jpg",
+    img2: "./assets/img/sobIbu.JPG",
     text: "O IBU é um evento de intercâmbio para jovens - também chamado de evento de integração, pois existem outros no Brasil todo. Nesses dias trocaremos experiências, conheceremos pessoas novas e aprenderemos coisas legais que possamos aplicar no nosso cotidiano, como também de certa forma na vida profissional!"
   }
 ];
