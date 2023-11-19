@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seinenkai - Bragança Pta.</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="game.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/LogoSeinen.svg">
+</head>
+
+<body>
+    
+    <nav class="navScroll">
+        <div class="nav-left">
+            <a href="../index.html" class="nav-logo">
+                <img src="../assets/img/LogoSeinen.svg" alt="">
+                <p>Seinenkai Bragança</p>
+            </a>
+            <a href="../eventos.html" class="nav-link">Eventos</a>
+            <a href="#" class="nav-link">Parcerias</a>
+        </div>
+
+        <div class="nav-right">
+            <a href="#" class="nav-button nav01">Faça Parte</a>
+            <a class="nav-button nav02 nav-modal-on" onclick="openCloseModal(this)">=</a>
+        </div>        
+    </nav> 
+     
+    <div class="nav-modal nav-modal-off">
+        <a href="../eventos.html" class="nav-link">Eventos</a>
+        <a href="#" class="nav-link">Parcerias</a>
+        <a href="#" class="nav-button">Faça Parte</a>
+    </div>
+
+
+    <div class="game">
+        <canvas></canvas>
+    </div>
+
+    <script src="./scripts/note.js"></script>
+    <script src="./scripts/canvas.js"></script>
+
+    <script>
+        function reloadGame(botao){
+            botao.classList.toggle('gobotaoc')
+            setTimeout(() => { location.reload() }, 500)
+        }
+    </script>
+</body>
+</html>
