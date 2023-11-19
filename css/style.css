@@ -43,6 +43,7 @@ header{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 header h1{
@@ -66,7 +67,7 @@ header h2{
     line-height: normal;
 }
 
-header::before {
+.headerIMG{
     content: ' ';
     display: block;
     position: absolute;
@@ -81,7 +82,59 @@ header::before {
     background-size: cover;
     
     z-index: -1;
-  }
+}
+
+.hNav{
+    position: absolute;
+    bottom: 65px;
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.hItm{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    opacity: .5;
+}
+
+.hItmA{
+
+    opacity: .7;
+    
+}
+
+.hItm:hover{
+    scale: 1.05;
+    opacity: 1;
+
+}
+
+.hImg{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hImg img{
+    height: 100%;
+}
+
+.hText h4{
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.hText p{
+    font-size: 18px;
+}
 
 a {
     color: inherit; 
@@ -102,6 +155,7 @@ a {
 }
 
 .sobre-image{
+    min-width: 25vw;
     max-width: 507px;
     height: 678px;
     overflow: hidden;
@@ -145,6 +199,83 @@ a {
     line-height: normal;
 }
 
+hr{
+    width: 70%;
+    margin: 50px;
+}
+
+.diretoria{
+
+    width: 80%;
+}
+
+.diretoria h3{
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 40px;
+
+}
+
+.cardArea{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+}
+
+.card {
+    width: 400px;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cardImg {
+    background-color: #FFF;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 1s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card:hover .cardImg{
+    transform: rotateX(40deg) translateY(50px);
+    opacity: 40%;
+}
+
+.cardHover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1.5s ease-in-out;
+
+    opacity: 0;
+    transform: translateY(30%);
+}
+
+.card:hover .cardHover{
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.card img{
+    height: 100%;
+}
+
 @media only screen and (max-width: 1080px) {
    .sobre{
     flex-direction: column;
@@ -157,5 +288,9 @@ a {
 
    .sobre>img{
     display: none;
+   }
+
+   .diretoria{
+    width: 90%;
    }
 }
