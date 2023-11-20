@@ -1,7 +1,7 @@
 class Note{
     constructor(value){
       this.value = value
-      this.speed = 5
+      this.speed = 7
       switch(value){
         case 1:
           this.color = "blue"
@@ -13,20 +13,20 @@ class Note{
           break;
         case 3:
           this.color = "blue"
-          this.dia = 150
+          this.dia = 140
           break;
         case 4:
           this.color = "red"
-          this.dia = 150        
+          this.dia = 140        
           break;
       }
-      this.posX = canvas.width
+      this.posX = canvas.width + this.dia/2
     }
   
     draw(){
       c.fillStyle = this.color;
-      c.fillRect(this.posX, (canvas.height-this.dia)/2, this.dia, this.dia)  
-      c.strokeRect(this.posX, (canvas.height-this.dia)/2, this.dia, this.dia)  
+      c.fillRect(this.posX-this.dia/2, (canvas.height-this.dia)/2, this.dia, this.dia)  
+      c.strokeRect(this.posX-this.dia/2, (canvas.height-this.dia)/2, this.dia, this.dia)  
     }
   
     update(){

@@ -23,20 +23,38 @@ const drumKat = new Audio ()
 drumKat.src = "./assets/kat.mp3"
 
 // Variaveis globais
-const keys = [];
 const activeNotes = [];
-const scoreWidth = 400
+const avaiableKeys = ["x", "c", "v", "b"]
+const keys = [];
+let score = 0;
+
+const scoreWidth = 400;
+const clickX = 500;
+let frame = 0;
 
 
+
+console.log(score);
+
+
+
+
+// funções
 
 function animate(){
   requestAnimationFrame(animate)
+  frame++
 
   // draw
   drawGame()
 
   // verificar
   verifyGameStatus()
+
+  if(frame%75 ==0){
+    let rand = Math.floor(Math.random()*4+1)
+    activeNotes.push(new Note(rand))
+  }
 }
 
 animate()
@@ -47,6 +65,18 @@ function drawGame(){
   c.fillStyle = "#202020"
   c.fillRect(0,0,canvas.width,canvas.height)
 
+  // click
+  c.beginPath();
+  c.arc(clickX, canvas.height/2, 50, 0, 2 * Math.PI);
+  c.strokeStyle = "#FFF"
+  c.stroke();
+  c.beginPath();
+  c.arc(clickX, canvas.height/2, 80, 0, 2 * Math.PI);
+  c.strokeStyle = "#ffffff50"
+  if(keys.length != 0)  c.stroke();
+
+
+  // notes
   for(let i=0; i<activeNotes.length; i++){
     activeNotes[i].draw()
     activeNotes[i].update()
@@ -58,10 +88,10 @@ function drawGame(){
   // drum
   let drumPos = {x:200, y:(canvas.height-taikoDrum.height)/2}
   c.drawImage(taikoDrum, drumPos.x, drumPos.y)
-  if(keys.includes("x")) c.drawImage(taikoDrumBL, drumPos.x, drumPos.y)
-  if(keys.includes("c")) c.drawImage(taikoDrumRL, drumPos.x, drumPos.y)
-  if(keys.includes("b")) c.drawImage(taikoDrumRR, drumPos.x, drumPos.y)
-  if(keys.includes("n")) c.drawImage(taikoDrumBR, drumPos.x, drumPos.y)
+  if(keys.includes(avaiableKeys[0])) c.drawImage(taikoDrumBL, drumPos.x, drumPos.y)
+  if(keys.includes(avaiableKeys[1])) c.drawImage(taikoDrumRL, drumPos.x, drumPos.y)
+  if(keys.includes(avaiableKeys[2])) c.drawImage(taikoDrumRR, drumPos.x, drumPos.y)
+  if(keys.includes(avaiableKeys[3])) c.drawImage(taikoDrumBR, drumPos.x, drumPos.y)
   
 }
 
@@ -69,13 +99,60 @@ function verifyGameStatus(){
   endXNote()
 }
 
+
 function endXNote(){
-  for(let i=0; i<activeNotes.length; i++){
-    if(activeNotes[i].posX < scoreWidth-activeNotes[i].dia){
-      activeNotes.shift()
-    }
-  }  
+  if(activeNotes.length==0) return
+  if(activeNotes[0].posX < scoreWidth-activeNotes[0].dia){
+    activeNotes.shift()
+    updateScore(0)
+
+  }
 }
+
+
+function clickPoint(k){
+  if(activeNotes.length==0) return  
+
+  let distX = Math.abs(activeNotes[0].posX - clickX);
+  let cKey;
+  switch(k){
+    case avaiableKeys[0]:
+    case avaiableKeys[3]:
+      cKey = "blue"
+      break;
+    case avaiableKeys[1]:
+    case avaiableKeys[2]:
+      cKey = "red"
+  }
+  
+  if (distX>300) return
+  
+  if (distX>150){
+    activeNotes.shift()
+    updateScore(0)
+    return
+  }
+
+  if (cKey == activeNotes[0].color){
+    if (distX>20) {
+      updateScore(10)
+    }
+    else updateScore(20)
+  }
+  else{
+    updateScore(0)
+  }
+
+  activeNotes.shift()
+}
+
+function updateScore(x){
+  score += x
+
+  console.log("score: ", score);
+}
+
+
 
 // Keyboard
 window.addEventListener('keydown', (e) => {
@@ -84,29 +161,30 @@ window.addEventListener('keydown', (e) => {
   if(keys.includes(k)) return
 
   switch(k){
-    case "x":
-    case "n":
+    case avaiableKeys[0]:
+    case avaiableKeys[3]:
       keys.push(k)
       drumKat.currentTime = 0
       drumKat.play()
+      clickPoint(k)
       break;
-    case "c":
-    case "b":
+    case avaiableKeys[1]:
+    case avaiableKeys[2]:
       keys.push(k)
       drumDon.currentTime = 0
       drumDon.play()
+      clickPoint(k)
   }
-
 })
 
 window.addEventListener('keyup', (e) => {
   let k = e.key
 
   switch(k){
-    case "x":
-    case "c":
-    case "b":
-    case "n":
+    case avaiableKeys[0]:
+    case avaiableKeys[1]:
+    case avaiableKeys[2]:
+    case avaiableKeys[3]:
       keys.splice(keys.indexOf(k))  
   }
 
