@@ -85,6 +85,14 @@ function drawGame(){
   // score area
   c.fillStyle = "#c62d49d7"
   c.fillRect(0,0,scoreWidth,canvas.height)
+  // score
+  c.fillStyle = "#fff"
+  c.font = "40px arial";
+  c.fillText(score, 5, 45);
+  c.strokeStyle = "#000"
+  c.strokeText(score, 5, 45);
+
+
   // drum
   let drumPos = {x:200, y:(canvas.height-taikoDrum.height)/2}
   c.drawImage(taikoDrum, drumPos.x, drumPos.y)
@@ -127,7 +135,7 @@ function clickPoint(k){
   
   if (distX>300) return
   
-  if (distX>150){
+  if (distX>100){
     activeNotes.shift()
     updateScore(0)
     return
