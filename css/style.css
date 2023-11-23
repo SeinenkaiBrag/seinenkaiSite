@@ -163,10 +163,28 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    position: relative;
 }
 
 .sobre-image img{
     height: 100%;
+}
+
+.sobre-image a{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    transform: translateY(40%);
+}
+
+.sobre-image:hover a{
+    width: 35%;
+}
+
+.sobre-image a img{
+    width: 100%;
 }
 
 .sobre-text {
