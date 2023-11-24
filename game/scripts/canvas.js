@@ -24,7 +24,7 @@ drumKat.src = "./assets/kat.mp3"
 
 // Variaveis globais
 const activeNotes = [];
-const avaiableKeys = ["x", "c", "v", "b"]
+const avaiableKeys = ["c", "x", "v", "b"]
 const keys = [];
 let score = 0;
 
@@ -96,8 +96,8 @@ function drawGame(){
   // drum
   let drumPos = {x:200, y:(canvas.height-taikoDrum.height)/2}
   c.drawImage(taikoDrum, drumPos.x, drumPos.y)
-  if(keys.includes(avaiableKeys[0])) c.drawImage(taikoDrumBL, drumPos.x, drumPos.y)
-  if(keys.includes(avaiableKeys[1])) c.drawImage(taikoDrumRL, drumPos.x, drumPos.y)
+  if(keys.includes(avaiableKeys[1])) c.drawImage(taikoDrumBL, drumPos.x, drumPos.y)
+  if(keys.includes(avaiableKeys[0])) c.drawImage(taikoDrumRL, drumPos.x, drumPos.y)
   if(keys.includes(avaiableKeys[2])) c.drawImage(taikoDrumRR, drumPos.x, drumPos.y)
   if(keys.includes(avaiableKeys[3])) c.drawImage(taikoDrumBR, drumPos.x, drumPos.y)
   
@@ -110,10 +110,9 @@ function verifyGameStatus(){
 
 function endXNote(){
   if(activeNotes.length==0) return
-  if(activeNotes[0].posX < scoreWidth-activeNotes[0].dia){
+  if(activeNotes[0].posX < scoreWidth-activeNotes[0].radius/2){
     activeNotes.shift()
     updateScore(0)
-
   }
 }
 
@@ -122,16 +121,7 @@ function clickPoint(k){
   if(activeNotes.length==0) return  
 
   let distX = Math.abs(activeNotes[0].posX - clickX);
-  let cKey;
-  switch(k){
-    case avaiableKeys[0]:
-    case avaiableKeys[3]:
-      cKey = "blue"
-      break;
-    case avaiableKeys[1]:
-    case avaiableKeys[2]:
-      cKey = "red"
-  }
+  let cKey = avaiableKeys.indexOf(k)%2;
   
   if (distX>300) return
   
@@ -141,7 +131,7 @@ function clickPoint(k){
     return
   }
 
-  if (cKey == activeNotes[0].color){
+  if (cKey == activeNotes[0].value%2){
     if (distX>20) {
       updateScore(10)
     }
@@ -165,18 +155,17 @@ function updateScore(x){
 // Keyboard
 window.addEventListener('keydown', (e) => {
   let k = e.key
-
   if(keys.includes(k)) return
 
   switch(k){
-    case avaiableKeys[0]:
+    case avaiableKeys[1]:
     case avaiableKeys[3]:
       keys.push(k)
       drumKat.currentTime = 0
       drumKat.play()
       clickPoint(k)
       break;
-    case avaiableKeys[1]:
+    case avaiableKeys[0]:
     case avaiableKeys[2]:
       keys.push(k)
       drumDon.currentTime = 0
@@ -196,23 +185,4 @@ window.addEventListener('keyup', (e) => {
       keys.splice(keys.indexOf(k))  
   }
 
-})
-
-
-// Mouse
-const mouse = {
-  x: undefined,
-  y: undefined
-}
-
-canvas.addEventListener('click', (e) => {
-  
-})
-
-canvas.addEventListener('mousemove', (e) => {
-  canvas.style.cursor = ""
-  var rect = canvas.getBoundingClientRect()
-
-  mouse.x = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width
-  mouse.y = (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
 })
