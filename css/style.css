@@ -175,12 +175,14 @@ a {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 0%;
-    transform: translateY(40%);
+    width: 35%;
+    transform: translateY(100%);
+    animation: .5s ease-in-out;
 }
 
 .sobre-image:hover a{
-    width: 35%;
+    transform: translateY(40%);
+
 }
 
 .sobre-image a img{
@@ -271,7 +273,7 @@ hr{
     height: 100%;
     border-radius: 20px;
     overflow: hidden;
-    transition: 1s ease-in-out;
+    transition: .8s ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -291,7 +293,7 @@ hr{
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 1.5s ease-in-out;
+    transition: 1s ease-in-out;
 
     opacity: 0;
     transform: translateY(30%);
