@@ -5,6 +5,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: #00000000;
     background-color: black;
 }
 
@@ -25,10 +26,104 @@ body::before {
     z-index: -1;
   }
 
+.top{
+    overflow: hidden;
+}
+
+.top img{
+    opacity: 0.8;
+    width: 100%;
+    
+  }
+
+.low{
+    overflow: hidden;
+    position: relative;
+    height: 55%;
+  }
+
+.low>img{
+    width: 100%;
+    opacity: 0.6;
+    
+  }
+
+.dancinha1{
+    overflow: hidden; 
+    width: 10%;
+    height: 45%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+}
+
+.dancinha1 img{
+    height: 100%;
+       animation: spritezinho1 1s steps(8) infinite ; 
+}
+
+.taiko1{
+    top: 60%;
+    left: 20%;
+}
+
+.taiko2{
+    top: 60%;
+    left: 80%;
+}
+
+@keyframes spritezinho1 {
+    from{
+        transform: translateX(0%);
+    }
+    to{
+        transform: translateX(-90%);
+    }
+    
+}
+
+.dance{
+    overflow: hidden; 
+    width: 10%;
+    height: 45%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+}
+
+.dance img{
+    height: 100%;
+    animation: sprite 2.5s steps(19) infinite ; 
+}
+
+.gato1{
+    top: 60%;
+    left: 40%;
+}
+
+.gato2{
+    top: 50%;
+    left: 50%;
+}
+.gato3{
+    top: 60%;
+    left: 60%;
+}
+
+
+@keyframes sprite {
+    from{
+        transform: translateX(0%);
+    }
+    to{
+        transform: translateX(-95%);
+    }
+    
+}
+
 .game{
     margin-top: 100px;
     width: 80vw;
     aspect-ratio: 19/12;
+    background-color: black;
 
     overflow: hidden;
     position: relative;

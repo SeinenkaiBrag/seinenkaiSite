@@ -30,6 +30,8 @@ let score = 0;
 
 const scoreWidth = 400;
 const clickX = 500;
+let clickPointAnimate = .2;
+let pointColor = 0;
 let frame = 0;
 
 
@@ -50,10 +52,13 @@ function animate(){
 
   // verificar
   verifyGameStatus()
-
-  if(frame%75 ==0){
-    let rand = Math.floor(Math.random()*4+1)
-    activeNotes.push(new Note(rand))
+  if(frame%5 == 0){
+    let frameRate = Math.floor(Math.random()*20+20)
+    console.log(frameRate);
+    if(frame%frameRate == 0){
+      let rand = Math.floor(Math.random()*4+1)
+      activeNotes.push(new Note(rand))
+    }
   }
 }
 
@@ -65,36 +70,66 @@ function drawGame(){
   c.fillStyle = "#202020"
   c.fillRect(0,0,canvas.width,canvas.height)
 
-  // click
+//click point
+  var gradient = c.createRadialGradient(clickX, canvas.height/2, 0, clickX, canvas.height/2, 200);
+  gradient.addColorStop(0, '#00000000');
+  if(clickPointAnimate < 0.8){
+    if(pointColor == 3)gradient.addColorStop(clickPointAnimate, 'green');
+    if(pointColor == 2)gradient.addColorStop(clickPointAnimate, 'blue');
+    if(pointColor == 1)gradient.addColorStop(clickPointAnimate, 'red');
+    if(frame%10)clickPointAnimate = clickPointAnimate + 0.05;
+  }
+
+
+  gradient.addColorStop(clickPointAnimate+.1, '#00000000');
+  c.fillStyle = gradient;
+
   c.beginPath();
-  c.arc(clickX, canvas.height/2, 50, 0, 2 * Math.PI);
-  c.strokeStyle = "#FFF"
+  c.arc(clickX, canvas.height/2, 150, 0, 2 * Math.PI);
+  c.fill();
+
+// click
+  c.beginPath();
+  c.arc(clickX, canvas.height/2, 52, 0, 2 * Math.PI);
+  c.lineWidth = 2
+  c.strokeStyle = "#ffffff60"
+  c.fillStyle = "#ffffff30"
   c.stroke();
+  if(keys.length != 0) c.fill();
+
   c.beginPath();
   c.arc(clickX, canvas.height/2, 80, 0, 2 * Math.PI);
-  c.strokeStyle = "#ffffff50"
-  if(keys.length != 0)  c.stroke();
+  c.strokeStyle = "#ffffff20"
+  c.stroke();
 
 
-  // notes
-  for(let i=0; i<activeNotes.length; i++){
+// notes
+  for(let i=activeNotes.length-1; i>=0; i--){
     activeNotes[i].draw()
     activeNotes[i].update()
   }
 
-  // score area
-  c.fillStyle = "#c62d49d7"
+// score area
+  c.fillStyle = "#d860d870"
   c.fillRect(0,0,scoreWidth,canvas.height)
-  // score
+
+// score
+  c.fillStyle = "#00000050"
+  c.beginPath();
+  c.roundRect(scoreWidth-350, canvas.height-70, 350, 60, [30, 0, 0, 30]);
+  c.fill();
+
   c.fillStyle = "#fff"
-  c.font = "40px arial";
-  c.fillText(score, 5, 45);
+  c.font = "42px arial black";
+  c.textAlign = "right";
+  c.fillText(score, 242, canvas.height-25);
   c.strokeStyle = "#000"
-  c.strokeText(score, 5, 45);
+  c.lineWidth = 3
+  c.strokeText(score, 242, canvas.height-25);
 
 
-  // drum
-  let drumPos = {x:200, y:(canvas.height-taikoDrum.height)/2}
+// drum
+  let drumPos = {x:220, y:(canvas.height-taikoDrum.height)/2}
   c.drawImage(taikoDrum, drumPos.x, drumPos.y)
   if(keys.includes(avaiableKeys[1])) c.drawImage(taikoDrumBL, drumPos.x, drumPos.y)
   if(keys.includes(avaiableKeys[0])) c.drawImage(taikoDrumRL, drumPos.x, drumPos.y)
@@ -146,8 +181,12 @@ function clickPoint(k){
 
 function updateScore(x){
   score += x
+  
+    if(x == 20) pointColor = 3;
+    else if(x == 10) pointColor = 2;
+    else pointColor = 1;
 
-  console.log("score: ", score);
+  clickPointAnimate = 0;
 }
 
 
