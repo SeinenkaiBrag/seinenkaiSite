@@ -27,6 +27,12 @@ drumDon.src = "./assets/don.mp3"
 const drumKat = new Audio ()
 drumKat.src = "./assets/kat.mp3"
 
+const bgMusic = new Audio ()
+bgMusic.src = "./assets/JapaneseMusic.mp3"
+bgMusic.volume = .25
+
+
+
 // Variaveis globais
 const activeNotes = [];
 const avaiableKeys = ["c", "x", "v", "b"]
@@ -46,6 +52,8 @@ let frame = 0;
 function animate(){
   requestAnimationFrame(animate)
   frame++
+
+  bgMusic.play()
 
   // draw
   drawGame()
