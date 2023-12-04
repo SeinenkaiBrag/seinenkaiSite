@@ -5,6 +5,11 @@ const c = canvas.getContext("2d")
 canvas.width = 1530
 canvas.height = 250
 
+// Imagens
+const imageCapi = document.querySelector(".gameCapi")
+const imageDanceNinja = document.querySelectorAll(".dance")
+const imageDanceTaiko = document.querySelectorAll(".dancinha1")
+
 // Assets
 const taikoDrum = new Image ()
 taikoDrum.src = "./assets/taiko.png"
@@ -36,11 +41,6 @@ let frame = 0;
 
 
 
-console.log(score);
-
-
-
-
 // funções
 
 function animate(){
@@ -52,12 +52,14 @@ function animate(){
 
   // verificar
   verifyGameStatus()
+
+  // Gerar notas
   if(frame%5 == 0){
     let frameRate = Math.floor(Math.random()*20+20)
-    console.log(frameRate);
+
     if(frame%frameRate == 0){
       let rand = Math.floor(Math.random()*4+1)
-      activeNotes.push(new Note(rand))
+      activeNotes.push(new Note(rand, 5 + score/1500))
     }
   }
 }
@@ -140,6 +142,16 @@ function drawGame(){
 
 function verifyGameStatus(){
   endXNote()
+  
+  if (score>0) imageDanceNinja[0].style.opacity="1";
+  if (score>500){
+    imageDanceNinja[1].style.opacity="1";
+    imageDanceNinja[2].style.opacity="1";
+  }
+  if (score>1000){
+    imageDanceTaiko[0].style.opacity="1";
+    imageDanceTaiko[1].style.opacity="1";
+  }
 }
 
 
@@ -167,6 +179,7 @@ function clickPoint(k){
   }
 
   if (cKey == activeNotes[0].value%2){
+    imageCapi.classList.toggle("gameCapiClick");
     if (distX>20) {
       updateScore(10)
     }
@@ -225,3 +238,6 @@ window.addEventListener('keyup', (e) => {
   }
 
 })
+
+console.log('%cAVISO:', 'color: #FF5733; font-weight: bold; font-size: 30px;');
+console.log('%cNem vem tentar mudar os seus pontos e vidas usando console, mó mancada com os coleguinha. ಥ_ಥ', 'font-size: 14px;');

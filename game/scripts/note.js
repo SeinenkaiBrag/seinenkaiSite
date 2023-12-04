@@ -1,7 +1,7 @@
 class Note{
-    constructor(value){
+    constructor(value,speed){
       this.value = value
-      this.speed = 5  
+      this.speed = speed  
 
       switch(value){
         case 1:
@@ -14,11 +14,11 @@ class Note{
           break;
         case 3:
           this.color = "#7ee0f9"
-          this.radius = 70
+          this.radius = 65
           break;
         case 4:
           this.color = "#ff3300"
-          this.radius = 70        
+          this.radius = 65        
           break;
       }
 

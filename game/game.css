@@ -27,26 +27,48 @@ body::before {
   }
 
 .top{
-    overflow: hidden;
+    position: relative;
 }
 
 .top img{
     opacity: 0.8;
     width: 100%;
-    
-  }
+}
+
+.top .gameCapi{
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: -5%;
+    z-index: 20;
+
+    transition: .5s;
+
+    height: 200%;
+    width: auto;
+    transform: scaleX(-1);
+}
+
+.top .gameCapiClick{
+    transform: scaleX(-1) rotate(-10deg);
+}
 
 .low{
     overflow: hidden;
     position: relative;
     height: 55%;
-  }
+}
 
 .low>img{
     width: 100%;
-    opacity: 0.6;
-    
-  }
+    opacity: 0.6; 
+}
+
+.low>div{
+    opacity: 0;
+    transition: 2s;
+}
+
 
 .dancinha1{
     overflow: hidden; 
@@ -127,6 +149,15 @@ body::before {
 
     overflow: hidden;
     position: relative;
+}
+
+.protection{
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .game canvas{
