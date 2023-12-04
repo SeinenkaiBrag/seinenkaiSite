@@ -1,5 +1,4 @@
 // Configurando Canvas
-
 const canvas = document.querySelector("canvas")
 const c = canvas.getContext("2d")
 canvas.width = 1530
@@ -9,6 +8,8 @@ canvas.height = 250
 const imageCapi = document.querySelector(".gameCapi")
 const imageDanceNinja = document.querySelectorAll(".dance")
 const imageDanceTaiko = document.querySelectorAll(".dancinha1")
+const startGame = document.querySelector(".click")
+const gameOverMenu = document.querySelector(".gameOver")
 
 // Assets
 const taikoDrum = new Image ()
@@ -37,7 +38,7 @@ bgMusic.volume = .25
 const activeNotes = [];
 const avaiableKeys = ["c", "x", "v", "b"]
 const keys = [];
-let score = 0;
+let score = 0, vidas = 3;
 
 const scoreWidth = 400;
 const clickX = 500;
@@ -46,11 +47,10 @@ let pointColor = 0;
 let frame = 0;
 
 
-
 // funções
 
 function animate(){
-  requestAnimationFrame(animate)
+  let animationID = requestAnimationFrame(animate)
   frame++
 
   bgMusic.play()
@@ -70,10 +70,27 @@ function animate(){
       activeNotes.push(new Note(rand, 5 + score/1500))
     }
   }
+
+  if(vidas <= 0){
+    cancelAnimationFrame(animationID)
+    bgMusic.pause()
+    gameOverMenu.style.display = "flex";
+  } 
 }
 
-animate()
+function drawGameStart(){
+  c.fillStyle = "#fff"
+  c.font = "80px arial black";
+  c.textAlign = "center";
+  c.textBaseline = "middle";
+  let text = "Click to Play"
+  c.fillText(text, canvas.width/2, canvas.height/2);
+  c.strokeStyle = "#000"
+  c.lineWidth = 5
+  c.strokeText(text, canvas.width/2, canvas.height/2);
+}
 
+drawGameStart()
 
 function drawGame(){
   c.clearRect(0,0,canvas.width,canvas.height)  
@@ -132,6 +149,7 @@ function drawGame(){
   c.fillStyle = "#fff"
   c.font = "42px arial black";
   c.textAlign = "right";
+  c.textBaseline = "alphabetic";
   c.fillText(score, 242, canvas.height-25);
   c.strokeStyle = "#000"
   c.lineWidth = 3
@@ -205,7 +223,11 @@ function updateScore(x){
   
     if(x == 20) pointColor = 3;
     else if(x == 10) pointColor = 2;
-    else pointColor = 1;
+    else {
+      pointColor = 1;
+      vidas--
+      console.log(`%c${vidas} vidas`, 'color: #FF5733; font-weight: bold; font-size: 30px;');
+    } 
 
   clickPointAnimate = 0;
 }
@@ -214,6 +236,7 @@ function updateScore(x){
 
 // Keyboard
 window.addEventListener('keydown', (e) => {
+
   let k = e.key
   if(keys.includes(k)) return
 
@@ -247,5 +270,11 @@ window.addEventListener('keyup', (e) => {
 
 })
 
+startGame.addEventListener('click', () =>{
+  startGame.classList.remove("click");
+  animate()
+});
+
 console.log('%cAVISO:', 'color: #FF5733; font-weight: bold; font-size: 30px;');
 console.log('%cNem vem tentar mudar os seus pontos e vidas usando console, mó mancada com os coleguinha. ಥ_ಥ', 'font-size: 14px;');
+console.log(`%c${vidas} vidas`, 'color: #FF5733; font-weight: bold; font-size: 30px;');
