@@ -227,6 +227,7 @@ body::before {
 @media only screen and (max-width: 750px) {
     .game{
         transform: translateY(-30%);
+        width: 100%;
     }
 
     .mobile-controls{
