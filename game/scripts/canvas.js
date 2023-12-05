@@ -276,14 +276,14 @@ startGame.addEventListener('click', () =>{
   animate()
 });
 
-mobileButton.forEach((e, index) => {
+mobileButton.forEach((e) => {
   let clicked;
-  if (index == 0) clicked = 1;
+  if (e.classList.contains("blue")) clicked = 1;
   else clicked = 0;
 
   e.addEventListener('touchstart', () => {
     keys.push(avaiableKeys[clicked])
-    if (clicked == 0) {
+    if (clicked == 1) {
       drumKat.currentTime = 0
       drumKat.play()
     }
