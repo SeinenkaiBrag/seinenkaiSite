@@ -283,7 +283,7 @@ mobileButton.forEach((e) => {
   if (e.classList.contains("blue")) clicked = 1;
   else clicked = 0;
 
-  e.addEventListener('touchstart', () => {
+  e.addEventListener('click', () => {
     keys.push(avaiableKeys[clicked])
     if (clicked == 1) {
       drumKat.currentTime = 0
