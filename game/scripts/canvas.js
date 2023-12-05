@@ -4,12 +4,13 @@ const c = canvas.getContext("2d")
 canvas.width = 1530
 canvas.height = 250
 
-// Imagens
+// HTML
 const imageCapi = document.querySelector(".gameCapi")
 const imageDanceNinja = document.querySelectorAll(".dance")
 const imageDanceTaiko = document.querySelectorAll(".dancinha1")
 const startGame = document.querySelector(".click")
 const gameOverMenu = document.querySelector(".gameOver")
+const mobileButton = document.querySelectorAll(".mobile-controls div")
 
 // Assets
 const taikoDrum = new Image ()
@@ -273,6 +274,31 @@ window.addEventListener('keyup', (e) => {
 startGame.addEventListener('click', () =>{
   startGame.classList.remove("click");
   animate()
+});
+
+mobileButton.forEach((e, index) => {
+  let clicked;
+  if (index == 0) clicked = 1;
+  else clicked = 0;
+
+  e.addEventListener('touchstart', () => {
+    keys.push(avaiableKeys[clicked])
+    if (clicked == 0) {
+      drumKat.currentTime = 0
+      drumKat.play()
+    }
+    else{
+      drumDon.currentTime = 0
+      drumDon.play()
+    }
+
+    clickPoint(avaiableKeys[clicked])
+  })
+
+  e.addEventListener('touchend', () => {
+    keys.splice(keys.indexOf(avaiableKeys[clicked]))
+  })
+  
 });
 
 console.log('%cAVISO:', 'color: #FF5733; font-weight: bold; font-size: 30px;');
