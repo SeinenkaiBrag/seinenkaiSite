@@ -276,6 +276,8 @@ startGame.addEventListener('click', () =>{
   animate()
 });
 
+const donn = document.querySelector(".don")
+
 mobileButton.forEach((e) => {
   let clicked;
   if (e.classList.contains("blue")) clicked = 1;
@@ -288,8 +290,8 @@ mobileButton.forEach((e) => {
       drumKat.play()
     }
     else{
-      drumDon.currentTime = 0
-      drumDon.play()
+      donn.currentTime = 0
+      donn.play()
     }
 
     clickPoint(avaiableKeys[clicked])
