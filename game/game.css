@@ -173,10 +173,10 @@ body::before {
 }
 
 .gameOver h2{
-    font-size: 150px;
+    font-size: 14vw;
 }
 .gameOver h3{
-    font-size: 50px;
+    font-size: 8vw;
 }
 
 .game canvas{
@@ -187,4 +187,49 @@ body::before {
     .game{
         width: 1280px;
     }
-  }
+
+    .gameOver h2{
+        font-size: 220px;
+    }
+    .gameOver h3{
+        font-size: 120px;
+    }
+}
+
+.mobile-controls{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20vh;
+
+    display: none;
+    justify-content: space-between;
+}
+
+.mobile-controls div{
+    height: 100%;
+    width: 35vw;
+    border: 3px solid black;
+}
+
+.mobile-controls .blue{
+    background-color: #7ee0f9;
+    border-radius: 0 30% 0 0;
+}
+
+.mobile-controls .red{
+    background-color: #ff3300;
+    border-radius: 30% 0 0 0;
+}
+
+
+
+@media only screen and (max-width: 750px) {
+    .game{
+        transform: translateY(-30%);
+    }
+
+    .mobile-controls{
+        display: flex;
+    }
+}
