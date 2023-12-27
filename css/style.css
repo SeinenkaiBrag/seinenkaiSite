@@ -256,13 +256,12 @@ hr{
     display: flex;
     width: 100%;
     justify-content: center;
-    flex-wrap: wrap;
     gap: 2vw;
 }
 
 .card {
     width: 400px;
-    height: 600px;
+    aspect-ratio: 4/6;
     position: relative;
     overflow: hidden;
 }
@@ -309,6 +308,7 @@ hr{
     height: 100%;
 }
 
+
 @media only screen and (max-width: 1080px) {
    .sobre{
     flex-direction: column;
@@ -331,3 +331,9 @@ hr{
     width: 90%;
    }
 }
+
+@media only screen and (max-width: 700px) {
+    .cardArea{
+        flex-wrap: wrap;
+    }
+ }
